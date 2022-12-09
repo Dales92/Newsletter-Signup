@@ -23,7 +23,7 @@ mailchimp.setConfig({
 //*****************************ENTER YOUR API KEY HERE******************************
  apiKey: process.env.MAILCHIMP_API_KEY,
 //*****************************ENTER YOUR API KEY PREFIX HERE i.e.THE SERVER******************************
- server: "us10"
+ server: process.env.MAILCHIMP_SERVER
 });
 
 
