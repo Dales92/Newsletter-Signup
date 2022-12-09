@@ -21,10 +21,23 @@ app.get("/", function(req, res) {
 //Setting up MailChimp
 mailchimp.setConfig({
 //*****************************ENTER YOUR API KEY HERE******************************
- apiKey: "036d941d6254ee75272cddb03ed417e7-us10",
+ apiKey: process.env.MAILCHIMP_API_KEY,
 //*****************************ENTER YOUR API KEY PREFIX HERE i.e.THE SERVER******************************
  server: "us10"
 });
+
+
+// Attempt to connect to the Mailchimp API
+mailchimp.ping
+  .get()
+  .then(response => {
+    // Connection was successful
+    console.log("Successfully connected to the Mailchimp API");
+  })
+  .catch(error => {
+    // Connection failed
+    console.error(`Failed to connect to the Mailchimp API: ${error.message}`);
+  });
 
 //As soon as the sign in button is pressed execute this
 app.post("/", function (req,res) {
@@ -73,9 +86,3 @@ app.post("/failure", function(req, res){
 app.listen(process.env.PORT || port, () =>
   console.log("server is running on port 3000")
 );
-
-// API KEY
-// 6c81940e8463128500c986424235acef-us10
-
-// List ID
-// dcc279a068
